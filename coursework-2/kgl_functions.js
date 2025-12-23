@@ -105,3 +105,93 @@ console.log(createSalesRecord("Maize",50, "Hana", 4000))
   isCreditSale: false
 }
  */
+
+
+//5. Create a sales record object by calling your function with test data. Then:
+let salesRecord = createSalesRecord("Beans", 1500, "Jhon", 400000);
+// Add a new property branch with value "Maganjo" using dot notation
+salesRecord.branch = "Maganjo";
+// Modify the isCreditSale property to true
+salesRecord.isCreditSale = true;
+// Add a dueDate property using bracket notation
+salesRecord["dueDate"] = new Date("2026-01-15");
+// Use Object.keys() to get all property names and log them (10 marks)
+console.log(Object.keys(salesRecord));
+
+// 6. Write a for...in loop that iterates over your sales record object and logs each property
+// name and value in the format: "Property: [name], Value: [value]" (10 marks)
+for(let property in salesRecord){
+  console.log(`Property: ${property}, Value: ${salesRecord[property]}`)
+}
+
+/**
+output:
+Property: id, Value: 9293
+Property: produceName, Value: Beans
+Property: tonnage, Value: 1500
+Property: buyerName, Value: Jhon
+Property: amountPaid, Value: 400000
+Property: saleDate, Value: Tue Dec 23 2025 20:33:35 GMT+0300 (East Africa Time)      
+Property: isCreditSale, Value: true
+Property: branch, Value: Maganjo
+Property: dueDate, Value: Thu Jan 15 2026 03:00:00 GMT+0300 (East Africa Time)
+ */
+
+// Part C: Loop Implementation and Data Processing (35 marks)
+// 7. Create an array of daily procurement tonnages for a week:
+let weeklyTonnage = [1200, 1500, 980, 2000, 1100, 1800, 1300];
+
+// Calculates the total tonnage for the week
+let totalTonnage = 0;
+for(let i = 0; i < weeklyTonnage.length; i++){
+totalTonnage += weeklyTonnage[i];
+}
+// Calculates the average daily tonnage
+
+let averageDailyTonnage = totalTonnage / weeklyTonnage.length
+// Logs both results (15 marks)
+console.log("Total Tonnage:",totalTonnage)//Total Tonnage: 9880
+console.log("Daily Tonnage Average:", averageDailyTonnage)//Daily Tonnage Average: 1411.4285714285713
+
+// 8. Create an array of sales records (use your createSalesRecord function to create at least 5 records with varying data). 
+// Write code using a for...of loop that: Counts how many credit sales exist ( isCreditSale === true )
+// Uses the continue statement to skip non-credit sales
+// Logs "Total credit sales: [count]" (15 marks);
+
+let salesRecords = [];
+
+salesRecords.push(createSalesRecord("Maize", 1200, "Jhon", 50000));
+salesRecords.push(createSalesRecord("Beans", 1500, "Sara", 30000));
+salesRecords.push(createSalesRecord("Rice", 200, "Karl", 20000));
+salesRecords.push(createSalesRecord("Coffee", 2000, "Hana", 100000));
+salesRecords.push(createSalesRecord("Cassava", 1100, "Mary", 40000));
+// console.log(salesRecords)
+
+salesRecords[1].isCreditSale = true;
+salesRecords[3].isCreditSale = true;
+
+let creditSalesCount = 0;
+for(let sale of salesRecords){
+  if(sale.isCreditSale !== true){
+    continue; //if credit sale is not true or if it is fales it skips it
+  }
+  creditSalesCount++;
+}
+console.log("Total Credit Sales: ", creditSalesCount);
+
+// 9. Simulate a stock check: Create an inventory array:
+let inventory = [
+{name: 'Beans', tonnage: 500},
+{name: 'Maize', tonnage: 0},
+{name: 'G-nuts', tonnage: 300}
+];
+
+// Use a for loop with a break statement to: Search for the first item with tonnage === 0
+// When found, log "Manager Alert: [produce name] is out of stock" and exit the loop immediately (5 marks)
+
+for(let i = 0; i < inventory.length; i++){
+  if(inventory[i].tonnage === 0){
+    console.log(`Manager Alert: ${inventory[i].name} is out of stock`) //Manager Alert: Maize is out of stock
+    break;
+  }
+}
